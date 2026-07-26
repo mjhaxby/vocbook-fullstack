@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1218 1001" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;">
+    <g id="graph0" transform="matrix(1.299235,0,0,1.299235,5.19694,995.733747)">
+        <rect x="-4" y="-766.4" width="937.09" height="770.4" style="fill:white;fill-rule:nonzero;"/>
+        <g id="clust1">
+            <path d="M20,-8L855,-8C861,-8 867,-14 867,-20L867,-742.4C867,-748.4 861,-754.4 855,-754.4L20,-754.4C14,-754.4 8,-748.4 8,-742.4L8,-20C8,-14 14,-8 20,-8" style="fill:none;fill-rule:nonzero;stroke:rgb(105,139,34);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,430.83,-738.4)">
+                <g transform="matrix(10,0,0,10,50.996094,0)">
+                </g>
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:10px;">V<tspan x="6.099px " y="0px ">o</tspan>cabBook</text>
+            </g>
+        </g>
+        <g id="node1">
+            <rect x="422" y="-70" width="106" height="50" style="fill:white;fill-rule:nonzero;"/>
+            <rect x="423" y="-69" width="104" height="22" style="fill:rgb(27,86,63);fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,444.88,-56)">
+                <text x="12.451px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:10px;fill:white;">Language</text>
+            </g>
+            <g transform="matrix(1,0,0,1,437,-38.8)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">code</text>
+            </g>
+            <g transform="matrix(1,0,0,1,481.5,-38.8)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">CharField</text>
+            </g>
+            <g transform="matrix(1,0,0,1,436.84,-25.8)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">name</text>
+            </g>
+            <g transform="matrix(1,0,0,1,481.5,-25.8)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">CharField</text>
+            </g>
+            <rect x="422" y="-70" width="106" height="50" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g id="node2">
+            <rect x="553" y="-160.6" width="106" height="37" style="fill:white;fill-rule:nonzero;"/>
+            <rect x="554" y="-159.6" width="104" height="22" style="fill:rgb(27,86,63);fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,573.11,-146.6)">
+                <text x="12.451px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:10px;fill:white;">W<tspan x="21.138px " y="0px ">o</tspan>rdClass</text>
+            </g>
+            <g transform="matrix(1,0,0,1,567.84,-129.4)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">name</text>
+            </g>
+            <g transform="matrix(1,0,0,1,612.5,-129.4)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">CharField</text>
+            </g>
+            <rect x="553" y="-160.6" width="106" height="37" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g id="edge1">
+            <path d="M569.34,-114.48C554.18,-103.48 536.44,-90.6 520.46,-79" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="572.96" cy="-117.11" r="4" style="stroke:black;stroke-width:1px;"/>
+            <circle cx="516.9" cy="-76.42" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,590.33,-94.4)">
+                <text x="-46.816px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">languages (word_classes)</text>
+            </g>
+        </g>
+        <g id="node3">
+            <rect x="148" y="-223.6" width="106" height="37" style="fill:white;fill-rule:nonzero;"/>
+            <rect x="149" y="-222.6" width="104" height="22" style="fill:rgb(27,86,63);fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,165.87,-209.6)">
+                <text x="12.451px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:10px;fill:white;">ChunkClass</text>
+            </g>
+            <g transform="matrix(1,0,0,1,162.84,-192.4)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">name</text>
+            </g>
+            <g transform="matrix(1,0,0,1,207.5,-192.4)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">CharField</text>
+            </g>
+            <rect x="148" y="-223.6" width="106" height="37" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g id="edge2">
+            <path d="M229.62,-176.53C249.16,-158.71 276.25,-135.89 302.92,-119.6C335.26,-99.85 373.84,-82.82 406.27,-70.13" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="226.34" cy="-179.56" r="4" style="stroke:black;stroke-width:1px;"/>
+            <circle cx="410.18" cy="-68.62" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,346.46,-139.7)">
+                <text x="-48.902px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">languages (chunk_classes)</text>
+            </g>
+        </g>
+        <g id="node4">
+            <rect x="305" y="-338.6" width="208" height="89" style="fill:white;fill-rule:nonzero;"/>
+            <rect x="306" y="-337.6" width="206" height="22" style="fill:rgb(27,86,63);fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,383.62,-324.6)">
+                <text x="12.451px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:10px;fill:white;">Lemma</text>
+            </g>
+            <g transform="matrix(1,0,0,1,320,-307.4)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">language</text>
+            </g>
+            <g transform="matrix(1,0,0,1,443.78,-307.4)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">F<tspan x="4.406px " y="0px ">o</tspan>reignK<tspan x="32.176px " y="0px ">e</tspan>y (id)</text>
+            </g>
+            <g transform="matrix(1,0,0,1,320,-294.4)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">word_class</text>
+            </g>
+            <g transform="matrix(1,0,0,1,443.78,-294.4)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">F<tspan x="4.406px " y="0px ">o</tspan>reignK<tspan x="32.176px " y="0px ">e</tspan>y (id)</text>
+            </g>
+            <g transform="matrix(1,0,0,1,320,-281.4)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">frequency_rank</text>
+            </g>
+            <g transform="matrix(1,0,0,1,444,-281.4)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">IntegerField</text>
+            </g>
+            <g transform="matrix(1,0,0,1,320,-268.4)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">headword</text>
+            </g>
+            <g transform="matrix(1,0,0,1,444,-268.4)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">CharField</text>
+            </g>
+            <g transform="matrix(1,0,0,1,319.57,-255.4)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">word_family_fr<tspan x="52.727px " y="0px ">e</tspan>quency_band</text>
+            </g>
+            <g transform="matrix(1,0,0,1,444,-255.4)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">IntegerField</text>
+            </g>
+            <rect x="305" y="-338.6" width="208" height="89" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g id="edge3">
+            <path d="M409.47,-237.28C410.57,-219.61 412.77,-200.11 417,-182.6C426.49,-143.28 446.16,-100.81 459.95,-73.84" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="409.26" cy="-241.3" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,468.05,-139.7)">
+                <text x="-32.592px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">language (lemma)</text>
+            </g>
+        </g>
+        <g id="edge4">
+            <path d="M416.9,-237.12C422.32,-217.45 431.48,-196.74 446.91,-182.6C461.44,-169.28 506.81,-158.82 545.4,-152.01" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="415.82" cy="-241.4" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,480.46,-202.7)">
+                <text x="-36.217px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">word_class (lemma)</text>
+            </g>
+        </g>
+        <g id="node5">
+            <rect x="251.5" y="-468.2" width="167" height="63" style="fill:white;fill-rule:nonzero;"/>
+            <rect x="252.5" y="-467.2" width="165" height="22" style="fill:rgb(27,86,63);fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,299.05,-454.2)">
+                <text x="12.451px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:10px;fill:white;">Relationship</text>
+            </g>
+            <g transform="matrix(1,0,0,1,266.5,-437)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">x</text>
+            </g>
+            <g transform="matrix(1,0,0,1,349.28,-437)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">F<tspan x="4.406px " y="0px ">o</tspan>reignK<tspan x="32.176px " y="0px ">e</tspan>y (id)</text>
+            </g>
+            <g transform="matrix(1,0,0,1,266.5,-424)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">y</text>
+            </g>
+            <g transform="matrix(1,0,0,1,349.28,-424)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">F<tspan x="4.406px " y="0px ">o</tspan>reignK<tspan x="32.176px " y="0px ">e</tspan>y (id)</text>
+            </g>
+            <g transform="matrix(1,0,0,1,266.23,-411)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">relationship_type</text>
+            </g>
+            <g transform="matrix(1,0,0,1,349.5,-411)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">CharField</text>
+            </g>
+            <rect x="251.5" y="-468.2" width="167" height="63" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g id="edge5">
+            <path d="M333.41,-392.53C334.4,-381.7 336.7,-370.39 341.35,-360.6C344.36,-354.25 348.27,-348.18 352.69,-342.49" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="333.14" cy="-396.98" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,364.67,-363)">
+                <text x="-23.889px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">x (relationsX)</text>
+            </g>
+        </g>
+        <g id="edge6">
+            <path d="M372.39,-394.59C378.19,-386.85 383.69,-378.56 388,-370.2C392.47,-361.54 396.09,-351.81 398.98,-342.3" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="369.76" cy="-397.96" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,415.78,-363)">
+                <text x="-23.84px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">y (relationsY)</text>
+            </g>
+        </g>
+        <g id="node6">
+            <rect x="533.5" y="-481.2" width="143" height="89" style="fill:white;fill-rule:nonzero;"/>
+            <rect x="534.5" y="-480.2" width="141" height="22" style="fill:rgb(27,86,63);fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,585.17,-467.2)">
+                <text x="12.451px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:10px;fill:white;">T<tspan x="17.686px " y="0px ">y</tspan>pe</text>
+            </g>
+            <g transform="matrix(1,0,0,1,548.5,-450)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">language</text>
+            </g>
+            <g transform="matrix(1,0,0,1,607.28,-450)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">F<tspan x="4.406px " y="0px ">o</tspan>reignK<tspan x="32.176px " y="0px ">e</tspan>y (id)</text>
+            </g>
+            <g transform="matrix(1,0,0,1,548.5,-437)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">lemma</text>
+            </g>
+            <g transform="matrix(1,0,0,1,607.28,-437)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">F<tspan x="4.406px " y="0px ">o</tspan>reignK<tspan x="32.176px " y="0px ">e</tspan>y (id)</text>
+            </g>
+            <g transform="matrix(1,0,0,1,548.23,-424)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">headword</text>
+            </g>
+            <g transform="matrix(1,0,0,1,607.5,-424)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">BooleanField</text>
+            </g>
+            <g transform="matrix(1,0,0,1,548.5,-411)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">ipa</text>
+            </g>
+            <g transform="matrix(1,0,0,1,607.5,-411)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">CharField</text>
+            </g>
+            <g transform="matrix(1,0,0,1,548.5,-398)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">word</text>
+            </g>
+            <g transform="matrix(1,0,0,1,607.5,-398)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">CharField</text>
+            </g>
+            <rect x="533.5" y="-481.2" width="143" height="89" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g id="edge7">
+            <path d="M568.63,-380.94C561.66,-368.7 554.98,-355.51 550,-342.6C534.15,-301.54 539.22,-288.64 530,-245.6C517.99,-189.51 518.14,-174.65 502,-119.6C497.48,-104.19 491.39,-87.35 486.14,-73.67" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="570.74" cy="-384.55" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,552.05,-202.7)">
+                <text x="-28.061px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">language (type)</text>
+            </g>
+        </g>
+        <g id="edge8">
+            <path d="M518.04,-390.25C507.67,-383.89 497.44,-377.15 488.02,-370.2C476.74,-361.89 465.38,-352.11 454.93,-342.4" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="521.75" cy="-392.48" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,512.01,-363)">
+                <text x="-25.852px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">lemma (types)</text>
+            </g>
+        </g>
+        <g id="node7">
+            <rect x="64.5" y="-461.7" width="153" height="50" style="fill:white;fill-rule:nonzero;"/>
+            <rect x="65.5" y="-460.7" width="151" height="22" style="fill:rgb(27,86,63);fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,117.27,-447.7)">
+                <text x="12.451px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:10px;fill:white;">Chunk</text>
+            </g>
+            <g transform="matrix(1,0,0,1,79.33,-430.5)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">chunk_class</text>
+            </g>
+            <g transform="matrix(1,0,0,1,148.28,-430.5)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">F<tspan x="4.406px " y="0px ">o</tspan>reignK<tspan x="32.176px " y="0px ">e</tspan>y (id)</text>
+            </g>
+            <g transform="matrix(1,0,0,1,79.5,-417.5)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">text</text>
+            </g>
+            <g transform="matrix(1,0,0,1,148.5,-417.5)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">CharField</text>
+            </g>
+            <rect x="64.5" y="-461.7" width="153" height="50" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g id="edge9">
+            <path d="M150.49,-399.39C163.15,-350.95 185.16,-266.72 195.43,-227.43" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="149.38" cy="-403.65" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,193.67,-363)">
+                <text x="-36.982px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">chunk_class (chunk)</text>
+            </g>
+        </g>
+        <g id="edge10">
+            <path d="M199.96,-403.5C224.68,-390.09 253.79,-374.46 280.24,-360.6C288.92,-356.05 297.94,-351.37 307.01,-346.7" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="196.05" cy="-405.62" r="4" style="stroke:black;stroke-width:1px;"/>
+            <circle cx="310.98" cy="-344.65" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,307.12,-363)">
+                <text x="-29.062px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">lemmas (chunk)</text>
+            </g>
+        </g>
+        <g id="node8">
+            <rect x="567" y="-319.1" width="122" height="50" style="fill:white;fill-rule:nonzero;"/>
+            <rect x="568" y="-318.1" width="120" height="22" style="fill:rgb(27,86,63);fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,599.83,-305.1)">
+                <text x="12.451px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:10px;fill:white;">T<tspan x="17.681px " y="0px ">a</tspan>gT<tspan x="33.931px " y="0px ">y</tspan>pe</text>
+            </g>
+            <g transform="matrix(1,0,0,1,582,-287.9)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">name</text>
+            </g>
+            <g transform="matrix(1,0,0,1,631,-287.9)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">CharField</text>
+            </g>
+            <g transform="matrix(1,0,0,1,581.61,-274.9)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">unique</text>
+            </g>
+            <g transform="matrix(1,0,0,1,630.95,-274.9)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">BooleanField</text>
+            </g>
+            <rect x="567" y="-319.1" width="122" height="50" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g id="node9">
+            <rect x="711" y="-455.2" width="100" height="37" style="fill:white;fill-rule:nonzero;"/>
+            <rect x="712" y="-454.2" width="98" height="22" style="fill:rgb(27,86,63);fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,743.67,-441.2)">
+                <text x="12.451px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:10px;fill:white;">T<tspan x="17.681px " y="0px ">a</tspan>g</text>
+            </g>
+            <g transform="matrix(1,0,0,1,725.5,-424)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">text</text>
+            </g>
+            <g transform="matrix(1,0,0,1,764.5,-424)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">CharField</text>
+            </g>
+            <rect x="711" y="-455.2" width="100" height="37" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g id="edge11">
+            <path d="M753.54,-405.74C734.39,-329.18 684.44,-131.56 676,-119.6C646.3,-77.53 589.86,-59.44 544.33,-51.7" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="754.63" cy="-410.09" r="4" style="stroke:black;stroke-width:1px;"/>
+            <circle cx="540.12" cy="-51.03" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,734.83,-202.7)">
+                <text x="-30.316px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">languages (tags)</text>
+            </g>
+        </g>
+        <g id="edge12">
+            <path d="M725.39,-409.32C715.39,-402.22 704.4,-394.72 694,-388.2C679.92,-379.38 672.47,-382.44 661.24,-370.2C651.1,-359.15 643.68,-344.51 638.46,-331.08" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="728.81" cy="-411.77" r="4" style="stroke:black;stroke-width:1px;"/>
+            <circle cx="637.03" cy="-327.16" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,686.12,-363)">
+                <text x="-27.066px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">tag_type (tags)</text>
+            </g>
+        </g>
+        <g id="node10">
+            <rect x="308" y="-597.8" width="142" height="63" style="fill:white;fill-rule:nonzero;"/>
+            <rect x="309" y="-596.8" width="140" height="22" style="fill:rgb(27,86,63);fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,356.39,-583.8)">
+                <text x="12.451px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:10px;fill:white;">V<tspan x="18.55px " y="0px ">o</tspan>cab</text>
+            </g>
+            <g transform="matrix(1,0,0,1,323,-566.6)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">chunk</text>
+            </g>
+            <g transform="matrix(1,0,0,1,380.78,-566.6)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">F<tspan x="4.406px " y="0px ">o</tspan>reignK<tspan x="32.176px " y="0px ">e</tspan>y (id)</text>
+            </g>
+            <g transform="matrix(1,0,0,1,322.66,-553.6)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">language</text>
+            </g>
+            <g transform="matrix(1,0,0,1,380.78,-553.6)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">F<tspan x="4.406px " y="0px ">o</tspan>reignK<tspan x="32.176px " y="0px ">e</tspan>y (id)</text>
+            </g>
+            <g transform="matrix(1,0,0,1,323,-540.6)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">lemma</text>
+            </g>
+            <g transform="matrix(1,0,0,1,380.78,-540.6)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">F<tspan x="4.406px " y="0px ">o</tspan>reignK<tspan x="32.176px " y="0px ">e</tspan>y (id)</text>
+            </g>
+            <rect x="308" y="-597.8" width="142" height="63" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g id="edge13">
+            <path d="M291.33,-556.24C203.69,-545.16 77.78,-523.05 48,-485.2C21.34,-451.32 24.12,-424.09 48,-388.2C59.48,-370.95 78.6,-386.79 91,-370.2C107.68,-347.89 97.74,-272.57 104.7,-245.6C112.28,-216.22 110.97,-205.39 131,-182.6C204.71,-98.74 336.83,-65.79 414.12,-53.27" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="295.76" cy="-556.79" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,133.35,-291.7)">
+                <text x="-31.129px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">language (vocab)</text>
+            </g>
+        </g>
+        <g id="edge14">
+            <path d="M415.01,-523.92C423.36,-512.14 431.2,-498.79 436,-485.2C454.48,-432.9 456.15,-414.48 443,-360.6C441.51,-354.5 439.35,-348.34 436.82,-342.36" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="412.44" cy="-527.41" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,474.02,-434.3)">
+                <text x="-24.549px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">lemma (uses)</text>
+            </g>
+        </g>
+        <g id="edge15">
+            <path d="M307.19,-526.8C270.48,-507.12 226.62,-483.6 193.18,-465.67" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="310.94" cy="-528.81" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,295.58,-505.6)">
+                <text x="-23.229px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">chunk (uses)</text>
+            </g>
+        </g>
+        <g id="edge16">
+            <path d="M422.44,-525.68C434.47,-516.79 448.07,-508.45 462.01,-503.2C558.8,-466.78 596.75,-520.38 694,-485.2C707.09,-480.47 719.94,-472.44 730.83,-464.31" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="419.12" cy="-528.22" r="4" style="stroke:black;stroke-width:1px;"/>
+            <circle cx="734.13" cy="-461.75" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,480,-505.6)">
+                <text x="-20.182px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">tags (uses)</text>
+            </g>
+        </g>
+        <g id="node11">
+            <rect x="313" y="-714.4" width="132" height="63" style="fill:white;fill-rule:nonzero;"/>
+            <rect x="314" y="-713.4" width="130" height="22" style="fill:rgb(27,86,63);fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,345,-700.4)">
+                <text x="12.451px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:10px;fill:white;">T<tspan x="17.783px " y="0px ">r</tspan>anslation</text>
+            </g>
+            <g transform="matrix(1,0,0,1,328,-683.2)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">into</text>
+            </g>
+            <g transform="matrix(1,0,0,1,375.78,-683.2)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">F<tspan x="4.406px " y="0px ">o</tspan>reignK<tspan x="32.176px " y="0px ">e</tspan>y (id)</text>
+            </g>
+            <g transform="matrix(1,0,0,1,328,-670.2)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">vocab</text>
+            </g>
+            <g transform="matrix(1,0,0,1,375.78,-670.2)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">F<tspan x="4.406px " y="0px ">o</tspan>reignK<tspan x="32.176px " y="0px ">e</tspan>y (id)</text>
+            </g>
+            <g transform="matrix(1,0,0,1,328,-657.2)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">text</text>
+            </g>
+            <g transform="matrix(1,0,0,1,376,-657.2)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">CharField</text>
+            </g>
+            <rect x="313" y="-714.4" width="132" height="63" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g id="edge18">
+            <path d="M296.56,-663.28C210.46,-638.83 80.38,-586.56 25,-485.2C4.33,-447.37 20.06,-431.03 25,-388.2C39.99,-258.31 40.01,-197.52 145,-119.6C187.07,-88.38 330.91,-64.91 414.15,-53.57" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="300.68" cy="-664.42" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,55.8,-363)">
+                <text x="-30.062px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">into (translation)</text>
+            </g>
+        </g>
+        <g id="edge19">
+            <path d="M434.96,-641.83C439.54,-637.81 443.95,-633.65 448,-629.4C458.28,-618.62 459.24,-614.51 467,-601.8C485.69,-571.22 476.86,-552.69 505.24,-530.8C573.58,-478.09 615.44,-520.93 694,-485.2C706.02,-479.73 718.12,-472 728.65,-464.36" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="431.6" cy="-644.69" r="4" style="stroke:black;stroke-width:1px;"/>
+            <circle cx="732.08" cy="-461.81" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,542.12,-563.9)">
+                <text x="-41.463px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">tags (translation_uses)</text>
+            </g>
+        </g>
+        <g id="edge17">
+            <path d="M379,-638.78L379,-601.66" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="379" cy="-643.02" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,411.66,-622.2)">
+                <text x="-36.068px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">vocab (translations)</text>
+            </g>
+        </g>
+        <g id="node12">
+            <rect x="508" y="-707.9" width="132" height="50" style="fill:white;fill-rule:nonzero;"/>
+            <rect x="509" y="-706.9" width="130" height="22" style="fill:rgb(27,86,63);fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,543.61,-693.9)">
+                <g transform="matrix(10,0,0,10,24.296875,0)">
+                </g>
+                <g transform="matrix(10,0,0,10,27.787258,0)">
+                </g>
+                <text x="12.451px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:10px;fill:white;">Deﬁnition</text>
+            </g>
+            <g transform="matrix(1,0,0,1,523,-676.7)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">vocab</text>
+            </g>
+            <g transform="matrix(1,0,0,1,570.78,-676.7)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">F<tspan x="4.406px " y="0px ">o</tspan>reignK<tspan x="32.176px " y="0px ">e</tspan>y (id)</text>
+            </g>
+            <g transform="matrix(1,0,0,1,523,-663.7)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">text</text>
+            </g>
+            <g transform="matrix(1,0,0,1,571,-663.7)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">CharField</text>
+            </g>
+            <rect x="508" y="-707.9" width="132" height="50" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g id="edge21">
+            <path d="M575.79,-645.13C579.1,-612.17 588.35,-564.02 613.9,-530.8C638.88,-498.33 659.45,-507.21 694,-485.2C704.26,-478.67 715.12,-471.21 725.04,-464.18" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="575.4" cy="-649.52" r="4" style="stroke:black;stroke-width:1px;"/>
+            <circle cx="728.42" cy="-461.77" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,649.45,-563.9)">
+                <g transform="matrix(8,0,0,8,-9.521484,0)">
+                </g>
+                <g transform="matrix(8,0,0,8,-6.947192,0)">
+                </g>
+                <text x="-38.834px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">tags (deﬁnition_uses)</text>
+            </g>
+        </g>
+        <g id="edge20">
+            <path d="M519.08,-649.62C493.67,-634.69 463.47,-616.94 437.63,-601.76" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="522.92" cy="-651.88" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,513.67,-622.2)">
+                <g transform="matrix(8,0,0,8,1.681641,0)">
+                </g>
+                <g transform="matrix(8,0,0,8,4.255933,0)">
+                </g>
+                <text x="-33.439px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">vocab (deﬁnitions)</text>
+            </g>
+        </g>
+        <g id="node13">
+            <rect x="701.5" y="-597.8" width="149" height="63" style="fill:white;fill-rule:nonzero;"/>
+            <rect x="702.5" y="-596.8" width="147" height="22" style="fill:rgb(27,86,63);fill-rule:nonzero;"/>
+            <g transform="matrix(1,0,0,1,731.45,-583.8)">
+                <text x="12.451px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:10px;fill:white;">F<tspan x="18.101px " y="0px ">u</tspan>nctionT<tspan x="57.349px " y="0px ">r</tspan>igger</text>
+            </g>
+            <g transform="matrix(1,0,0,1,716.5,-566.6)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">language</text>
+            </g>
+            <g transform="matrix(1,0,0,1,781.28,-566.6)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">F<tspan x="4.406px " y="0px ">o</tspan>reignK<tspan x="32.176px " y="0px ">e</tspan>y (id)</text>
+            </g>
+            <g transform="matrix(1,0,0,1,716.11,-553.6)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">word_class</text>
+            </g>
+            <g transform="matrix(1,0,0,1,781.28,-553.6)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Bold', 'Roboto';font-weight:700;font-size:8px;">F<tspan x="4.406px " y="0px ">o</tspan>reignK<tspan x="32.176px " y="0px ">e</tspan>y (id)</text>
+            </g>
+            <g transform="matrix(1,0,0,1,716.5,-540.6)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">text</text>
+            </g>
+            <g transform="matrix(1,0,0,1,781.5,-540.6)">
+                <text x="0px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">CharField</text>
+            </g>
+            <rect x="701.5" y="-597.8" width="149" height="63" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g id="edge22">
+            <path d="M832.15,-524.15C835.1,-520.55 837.76,-516.77 840,-512.8C873.3,-453.81 864.72,-426.24 848,-360.6C825.76,-273.29 804.96,-254.75 751,-182.6C716.82,-136.9 709.78,-119.91 660,-92C621.75,-70.56 573.53,-58.99 535.92,-52.82" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="829.16" cy="-527.47" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,799.795429,-170.089981)">
+                <text x="-47.061px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">language (functiontrigger)</text>
+            </g>
+        </g>
+        <g id="edge23">
+            <path d="M826.7,-523.93C829.16,-520.39 831.3,-516.68 833,-512.8C836.68,-504.41 870.4,-439.92 828,-388.2C806.73,-362.26 777.11,-395.16 754.7,-370.2C726.77,-339.1 767.1,-215.25 741,-182.6C723.24,-160.38 693.68,-150.2 666.75,-145.71" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="824.04" cy="-527.38" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,801.35,-363)">
+                <text x="-50.686px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">word_class (functiontrigger)</text>
+            </g>
+        </g>
+        <g id="edge24">
+            <path d="M757.96,-522.39C757.05,-519.18 756.28,-515.96 755.69,-512.8C752.93,-498.04 753.72,-481.41 755.42,-467.56" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;"/>
+            <circle cx="759.25" cy="-526.52" r="4" style="stroke:black;stroke-width:1px;"/>
+            <circle cx="756.02" cy="-463.36" r="4" style="stroke:black;stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,794.34,-505.6)">
+                <text x="-42.303px" y="0px" style="font-family:'Roboto-Regular', 'Roboto';font-size:8px;">tags (function_triggers)</text>
+            </g>
+        </g>
+    </g>
+</svg>
