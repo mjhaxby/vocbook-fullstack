@@ -33,8 +33,6 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = '__all__'
 
-
-
 class TypeSerializer(serializers.ModelSerializer):
     ipa_text= serializers.CharField(source='ipa.text', read_only=True)
 
@@ -88,12 +86,109 @@ class VocabSerializer(serializers.ModelSerializer):
     chunk = ChunkSerializer(read_only=True)
     is_lemma = serializers.SerializerMethodField()
     is_chunk = serializers.SerializerMethodField()
+    text = serializers.CharField(source='get_text', read_only=True)
+    vocabClass = serializers.CharField(source='get_vocab_class', read_only=True)
+    tags = serializers.TagSerializer(many=True, read_only=True, source='get_tags')
 
     def get_is_lemma(self, obj):
         return obj.lemma is not None
     
     def get_is_chunk(self, obj):
         return obj.chunk is not None
+
+    def get_text(self, obj):
+        if obj.lemma:
+            headword = Type.objects.filter(lemma=obj.lemma, is_headword=True).first()
+            return headword.text if headword else None
+        elif obj.chunk:
+            return obj.chunk.text
+        return None
+
+    def get_vocab_class(self, obj):
+        if obj.lemma:
+            return obj.lemma.word_class.name if obj.lemma.word_class else None
+        elif obj.chunk:
+            return obj.chunk.chunk_class.name if obj.chunk.chunk_class else None
+        return None
+
+    def get_tags(self, obj):
+        if obj.lemma:
+            return TagSerializer(obj.lemma.tags.all(), many=True).data
+        elif obj.chunk:
+            return TagSerializer(obj.chunk.tags.all(), many=True).data
+        return []
+
+    def create(self, validated_data):
+        definitions_data = validated_data.pop('definitions', [])
+        translations_data = validated_data.pop('translations', [])
+        vocab = Vocab.objects.create(**validated_data)
+
+        for definition_data in definitions_data:
+            Definition.objects.create(vocab=vocab, **definition_data)
+
+        for translation_data in translations_data:
+            Translation.objects.create(vocab=vocab, **translation_data)
+
+        return vocab
+
+    def update(self, instance, validated_data):
+        definitions_data = validated_data.pop('definitions', [])
+        translations_data = validated_data.pop('translations', [])
+
+        # Update the Vocab instance
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        # Update definitions (you can save processing by not sending definitions if they haven't changed)
+        if definitions_data:
+            if not definitions_data:
+                # If definitions_data is empty, delete all existing definitions
+                instance.definitions.all().delete()
+            else:
+                incoming_definition_ids = [d['id'] for d in definitions_data if 'id' in d]
+                for definition_data in definitions_data:
+                    # Look for any definitions that are not in the incoming data and delete them
+                    for definition in instance.definitions.all():
+                        if definition.id not in incoming_definition_ids:
+                            definition.delete()
+                    # Check if the definition already exists (by id) and update it, otherwise create a new one
+                    if 'id' in definition_data:
+                        definition = Definition.objects.get(id=definition_data['id'], vocab=instance)
+                        if definition:
+                            for attr, value in definition_data.items():
+                                setattr(definition, attr, value)
+                            definition.save()
+                        else:
+                            Definition.objects.create(vocab=instance, **definition_data) # in theory this should never happen because if we have an id, we should have a definition, but could happen if the definition was deleted in the meantime
+                    else:
+                        Definition.objects.create(vocab=instance, **definition_data)                     
+
+        # Update translations (you can save processing by not sending translations if they haven't changed)
+        if translations_data:
+            if not translations_data:
+                # If translations_data is empty, delete all existing translations
+                instance.translations.all().delete()
+            else:
+                incoming_translation_ids = [t['id'] for t in translations_data if 'id' in t]
+                for translation_data in translations_data:
+                    # Look for any translations that are not in the incoming data and delete them
+                    for translation in instance.translations.all():
+                        if translation.id not in incoming_translation_ids:
+                            translation.delete()
+                    # Check if the translation already exists (by id) and update it, otherwise create a new one
+                    if 'id' in translation_data:
+                        translation = Translation.objects.get(id=translation_data['id'], vocab=instance)
+                        if translation:
+                            for attr, value in translation_data.items():
+                                setattr(translation, attr, value)
+                            translation.save()
+                        else:
+                            Translation.objects.create(vocab=instance, **translation_data)
+                    else:
+                        Translation.objects.create(vocab=instance, **translation_data)
+
+        return instance
 
     class Meta:
         model = Vocab
