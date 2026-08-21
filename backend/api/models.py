@@ -30,12 +30,16 @@ class WordClass(models.Model): # e.g. noun, verb…
     name = models.CharField(max_length=100)
     languages = models.ManyToManyField(Language, related_name='word_classes')
 
+    # to do: make sure name + language are unique together, so that we don't have two nouns in English, for example. This will be important for the UI to work properly.
+
     def __str__(self):
         return self.name
     
-class ChunkClass(models.Model): # e.g. phrasal verb, idiom…
+class ChunkClass(models.Model): # e.g. phrasal verb, idiom, noun phrase…
     name = models.CharField(max_length=100)
     languages = models.ManyToManyField(Language, related_name='chunk_classes')    
+
+    # to do: make sure name + language are unique together, so that we don't have two nouns in English, for example. This will be important for the UI to work properly.
 
     def __str__(self):
         return self.name

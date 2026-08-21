@@ -73,11 +73,15 @@ class TranslationSerializer(serializers.ModelSerializer):
         model = Translation
         fields = '__all__'
 
+        read_only_fields = ['vocab']
+
 
 class DefinitionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Definition
         fields = '__all__'
+
+        read_only_fields = ['vocab']
 
 class VocabSerializer(serializers.ModelSerializer):
     definitions = DefinitionSerializer(many=True)
@@ -87,8 +91,8 @@ class VocabSerializer(serializers.ModelSerializer):
     is_lemma = serializers.SerializerMethodField()
     is_chunk = serializers.SerializerMethodField()
     text = serializers.CharField(source='get_text', read_only=True)
-    vocabClass = serializers.CharField(source='get_vocab_class', read_only=True)
-    tags = serializers.TagSerializer(many=True, read_only=True, source='get_tags')
+    vocabClass = serializers.CharField(source='get_vocab_class', read_only=True)    
+    tags = TagSerializer(many=True, read_only=True, source='get_tags')
 
     def get_is_lemma(self, obj):
         return obj.lemma is not None
