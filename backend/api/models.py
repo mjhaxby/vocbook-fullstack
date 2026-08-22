@@ -61,7 +61,7 @@ class Lemma(models.Model):
     headword_text = models.CharField(max_length=255) # possibly need to remove this as it's redundant with the types, BUT　it might speed up searching/indexing in some cases
     frequency_rank = models.IntegerField(blank=True, null=True) # 1 is the most common word etc. -1 means unknown. We might have a ceiling where all extremely uncommon words have the same very high number (possibly higher than the real one)
     word_family_frequency_band = models.IntegerField(blank=True, null=True) # in 1K groups, e.g. 1 = in the 1000th most common words, 2 = in the 2000 most common words (but not 1000) etc.
-    tags = models.ManyToManyField('Tag', related_name='lemma_uses', null=True, blank=True) # tags can be added at the lemma level to indicate a particular usage of the word. if a unique tag type, it will override the one in the Vocab
+    tags = models.ManyToManyField('Tag', related_name='lemma_uses', blank=True) # tags can be added at the lemma level to indicate a particular usage of the word. if a unique tag type, it will override the one in the Vocab
 
     source = models.CharField(max_length=255, null=True, blank=True) # source of the lemma, e.g. a dictionary or corpus.
     # types: one to many
@@ -83,7 +83,7 @@ class Type(models.Model):
     text = models.CharField(max_length=255)    
     is_headword = models.BooleanField()
     ipa = models.ForeignKey(IPA, on_delete=models.SET_NULL, null=True, blank=True)
-    tags = models.ManyToManyField('Tag', related_name='type_uses', null=True, blank=True) # tags can be added at the type level to indicate a particular usage of the word. if a unique tag type, it will override the one in the Vocab
+    tags = models.ManyToManyField('Tag', related_name='type_uses', blank=True) # tags can be added at the type level to indicate a particular usage of the word. if a unique tag type, it will override the one in the Vocab
 
     source = models.CharField(max_length=255, null=True, blank=True) # source of the type, e.g. a dictionary or corpus.
 
@@ -113,8 +113,8 @@ class TagType(models.Model):
 
     name = models.CharField(max_length=100)
     unique = models.BooleanField() # unique tags are tags that can only be present if no other tag shares the same type in the same vocab, for example gender or register
-    word_class_restrictions = models.ManyToManyField(WordClass, related_name='tags', null=True, blank=True) # if a tag type has word class restrictions, it can only be applied to vocabs of that word class. For example,
-    chunk_class_restrictions = models.ManyToManyField(ChunkClass, related_name='tags', null=True, blank=True) # if a tag type has chunk class restrictions, it can only be applied to vocabs of that chunk class. For example, a tag type "idiom" can only be applied to vocabs of the chunk class "idiom"
+    word_class_restrictions = models.ManyToManyField(WordClass, related_name='tags', blank=True) # if a tag type has word class restrictions, it can only be applied to vocabs of that word class. For example,
+    chunk_class_restrictions = models.ManyToManyField(ChunkClass, related_name='tags', blank=True) # if a tag type has chunk class restrictions, it can only be applied to vocabs of that chunk class. For example, a tag type "idiom" can only be applied to vocabs of the chunk class "idiom"
 
     lemma_level = models.BooleanField(default=False) 
     type_level = models.BooleanField(default=False) # tags at this level are types like "number" (singular/plural) or "person" (first/second/third)
@@ -141,7 +141,7 @@ class Vocab(models.Model):
     lemma = models.ForeignKey(Lemma, related_name='uses', on_delete=models.CASCADE, null=True, blank=True) # a vocab can be a lemma or a chunk, but not both. If a lemma is present, it is a lemma (even if a chunk is added by mistake).
     chunk = models.ForeignKey(Chunk, related_name='uses', on_delete=models.CASCADE, null=True, blank=True)       
     source = models.CharField(max_length=255, null=True, blank=True) # source of the vocab, e.g. a dictionary or corpus.
-    tags = models.ManyToManyField(Tag, related_name='uses', null=True, blank=True) 
+    tags = models.ManyToManyField(Tag, related_name='uses', blank=True) 
     # UI should also pull up word class or chunk class, plus chunk- lemma-level dialects add display these as tags (type-level dialects should be displayed alongside the variants in the UI)
 
     # to do: examples!
@@ -211,9 +211,9 @@ class Relationship(models.Model): # can be between lemmas and chunks
 class Translation(models.Model):
     vocab = models.ForeignKey(Vocab, related_name='translations', on_delete=models.CASCADE)
     into = models.ForeignKey(Language, on_delete=models.CASCADE)
-    into_dialects = models.ManyToManyField(Dialect, related_name='translations', null=True, blank=True) # use the lowest relevant level dialect (remember this is the dialect of the language translated into)
+    into_dialects = models.ManyToManyField(Dialect, related_name='translations', blank=True) # use the lowest relevant level dialect (remember this is the dialect of the language translated into)
     text = models.CharField(max_length=255)
-    tags = models.ManyToManyField(Tag, related_name='translation_uses', null=True, blank=True) # tags can be added at the translation level to indicate a particular usage of the word. if a unique tag type, it will override the one in the Vocab
+    tags = models.ManyToManyField(Tag, related_name='translation_uses', blank=True) # tags can be added at the translation level to indicate a particular usage of the word. if a unique tag type, it will override the one in the Vocab
     # to do: add related definitions?
 
     source = models.CharField(max_length=255, null=True, blank=True) # source of the translation, e.g. a dictionary or corpus.
@@ -226,7 +226,7 @@ class Translation(models.Model):
 class Definition(models.Model):
     vocab = models.ForeignKey(Vocab, related_name='definitions', on_delete=models.CASCADE)
     text = models.CharField(max_length=255)
-    tags = models.ManyToManyField(Tag, related_name='definition_uses', null=True, blank=True) # tags can be added at the definition level to indicate a particular usage of the word. if a unique tag type, it will override the one in the Vocab
+    tags = models.ManyToManyField(Tag, related_name='definition_uses', blank=True) # tags can be added at the definition level to indicate a particular usage of the word. if a unique tag type, it will override the one in the Vocab
     general_sense = models.BooleanField(blank=True, null=True) # used to indicate that this definition gives a general sense of the word    
 
     source = models.CharField(max_length=255, null=True, blank=True) # source of the definition, e.g. a dictionary or corpus.
@@ -239,7 +239,7 @@ class FunctionTrigger(models.Model):
     language = models.ForeignKey(Language, on_delete=models.CASCADE)    
     text = models.CharField(max_length=100)
     word_class = models.ForeignKey(WordClass, on_delete=models.CASCADE)
-    tags = models.ManyToManyField(Tag, related_name='function_triggers', null=True, blank=True)
+    tags = models.ManyToManyField(Tag, related_name='function_triggers', blank=True)
     # optional_tags? suggested_tags?
     proceding = models.BooleanField()
     default_show = models.BooleanField() # Show in front or following lemmas of the word class
