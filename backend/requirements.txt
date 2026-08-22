@@ -10,3 +10,4 @@ pygraphviz==2.0
 pyparsing==3.3.2
 python-dotenv==1.2.2
 sqlparse==0.5.5
+whitenoise==6.8.2
