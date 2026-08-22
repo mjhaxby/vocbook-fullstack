@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import HomePage from './pages/HomePage';
 import VocabListPage from './pages/VocabListPage';
+import VocabDetailPage from './pages/VocabDetailPage';
+import VocabEditor from './components/VocabEditor';
 
 function App() {
   const [vocabs, setVocabs] = useState([]);
@@ -27,9 +30,11 @@ function App() {
               {/* <Route path="/login" element={<LoginPage />} /> */}
               {/* <Route element={<Layout />} > */}
                 {/* <Route element={<ProtectedRoute />}>               */}
-                  {/* <Route path="/" element={<HomePage />} />        
-                  <Route path="/dashboard" element={<HomePage />} />             */}
+                  {/* <Route path="/" element={<HomePage />} />        */}
+                  <Route path="/dashboard" element={<HomePage />} />             
                   <Route path="/vocabs" element={<VocabListPage />} />
+                  <Route path="/vocab/:id" element={<VocabDetailPage />} />
+                  <Route path="/vocab/edit/:id" element={<VocabEditor />} />
                 {/* </Route> */}
               {/* </Route>               */}
             </Routes>
