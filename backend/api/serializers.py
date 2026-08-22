@@ -87,7 +87,21 @@ class VocabSerializer(serializers.ModelSerializer):
     definitions = DefinitionSerializer(many=True)
     translations = TranslationSerializer(many=True)
     lemma = LemmaSerializer(read_only=True)
+    lemma_id = serializers.PrimaryKeyRelatedField(
+        source='lemma',
+        queryset=Lemma.objects.all(),
+        write_only=True,
+        required=False,
+        allow_null=True,
+    )
     chunk = ChunkSerializer(read_only=True)
+    chunk_id = serializers.PrimaryKeyRelatedField(
+        source='chunk',
+        queryset=Chunk.objects.all(),
+        write_only=True,
+        required=False,
+        allow_null=True,
+    )
     is_lemma = serializers.SerializerMethodField()
     is_chunk = serializers.SerializerMethodField()
     text = serializers.CharField(source='get_text', read_only=True)
@@ -196,7 +210,22 @@ class VocabSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Vocab
-        fields = '__all__'    
+        fields = [
+            'id',
+            'definitions',
+            'translations',
+            'lemma',
+            'lemma_id',
+            'chunk',
+            'chunk_id',
+            'is_lemma',
+            'is_chunk',
+            'text',
+            'vocabClass',
+            'tags',
+            'source',
+            'language',
+        ] 
 
 
 
