@@ -4,7 +4,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import VocabListPage from './pages/VocabListPage';
 import VocabDetailPage from './pages/VocabDetailPage';
-import VocabEditor from './components/VocabEditor';
+import VocabEditorPage from './pages/VocabEditorPage';
+import TagLibraryPage from './pages/TagLibraryPage';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faEdit, faTrash, faPlus, faSave } from '@fortawesome/free-solid-svg-icons';
+library.add(faEdit, faTrash, faPlus, faSave);
 
 function App() {
   const [vocabs, setVocabs] = useState([]);
@@ -30,11 +35,12 @@ function App() {
               {/* <Route path="/login" element={<LoginPage />} /> */}
               {/* <Route element={<Layout />} > */}
                 {/* <Route element={<ProtectedRoute />}>               */}
-                  {/* <Route path="/" element={<HomePage />} />        */}
+                  <Route path="/" element={<HomePage />} />       
                   <Route path="/dashboard" element={<HomePage />} />             
                   <Route path="/vocabs" element={<VocabListPage />} />
                   <Route path="/vocab/:id" element={<VocabDetailPage />} />
-                  <Route path="/vocab/edit/:id" element={<VocabEditor />} />
+                  <Route path="/vocab/edit/:id" element={<VocabEditorPage />} />
+                  <Route path="/tags/" element={<TagLibraryPage />} />
                 {/* </Route> */}
               {/* </Route>               */}
             </Routes>
