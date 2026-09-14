@@ -68,7 +68,21 @@ class TagEditor extends React.Component {
   }
 
 // builds one CSS rule per distinct tag group so its colour can be set at runtime
-  injectTagGroupStyles = (groups) => {    
+  injectTagGroupStyles = (tagLibrary) => {    
+
+    const groups = tagLibrary.map(tag => {
+        return {
+            id: tag.tag_group_id,
+            color: tag.tag_group_color
+        };
+    }).reduce((acc, group) => {
+        if (!acc.some(g => g.id === group.id)) {
+            acc.push(group);
+        }
+        return acc;
+    }, []);
+
+    console.log('tag groups:', groups)
 
     const css = groups
       .map(group => `.tag-group-${group.id}{ --bg: ${group.color}; --color: ${this.contrastColor(group.color)}; }`)
@@ -117,6 +131,7 @@ class TagEditor extends React.Component {
           separators={[SEPARATORS.COMMA, SEPARATORS.ENTER]}
           placeholder="Add a tag"
           allowDragDrop={false}
+          // to do: on key down, if tab, autofill (but don't add yet) the first suggestion
         />
       </div>
     );

@@ -103,6 +103,8 @@ class VocabEditor extends Component {
                         rawId: tag.id,
                         text: tag.text,
                         tag_group: tag.tag_group.name,
+                        tag_group_id: tag.tag_group.id,
+                        tag_group_color: tag.tag_group.color,
                         unique: tag.tag_group.unique,
                         className: `tag tag-group-${tag.tag_group.id} tag-unique-${tag.tag_group.unique}`
                     })),
@@ -197,7 +199,7 @@ class VocabEditor extends Component {
     }
 
     saveChanges = async (continueEditing = false) => {
-        const { vocab } = this.state;
+        let { vocab } = this.state;
         const vocabId = this.props.params.id;
 
         // to do: speed up processing by checking for changes, and only sending changed data to the backend (especially for translations and definitions)
