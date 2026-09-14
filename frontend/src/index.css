@@ -11,3 +11,111 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.btn-icon {
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5;
+}
+
+.hidden{
+  display: none !important;
+}
+
+.form-container, .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;  
+}
+
+/* Specific to editor */
+.vocab-type {
+  font-size: 0.8rem;  
+  color: #666;
+  margin-left: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#vocabType{
+  font-weight: bold;
+  color: #333;
+}
+
+.vocab-text-input{
+  font-size: 2rem;
+
+}
+
+.editor-container h2, .editor-container label{
+  font-size: 0.8em;
+  color: #666;
+  text-transform: uppercase;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.editor-line {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-start;
+  justify-items: flex-start;
+  gap: 10px;
+}
+
+
+/* the TranslationEditor wrapper inside the line */
+.editor-line .editor-line-inner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  align-content: stretch;
+  justify-content: flex-start;
+  justify-items: flex-start;
+  gap: 10px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.editor-line .editor-line-inner{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 5px;
+  width: 100%;
+  overflow: show;
+  transition: opacity 0.3s ease, transform 0.3s ease, height 0.3s ease;
+}
+
+.editor-line-inner.hidden{ 
+  display: flex !important;  
+  height: 0;
+  overflow: hidden;
+  opacity:0;
+  transform: translateY(-100%);  
+  margin: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border-width: 0 !important;
+  pointer-events: none;
+}
+
+
+/* language select: fixed/content size */
+.editor-line .editor-line-inner .form-control:not(.main-control) {
+  flex: 0 0 auto;
+  width: auto;          /* override Bootstrap width:100% */
+  min-width: 6rem;      /* optional */
+}
+
+/* translation text input: take the rest */
+.editor-line .editor-line-inner .form-control.main-control {
+  flex: 1 1 auto;
+  min-width: 0;         /* allows shrinking instead of overflow */
+  width: auto;          /* override Bootstrap width:100% */
+}

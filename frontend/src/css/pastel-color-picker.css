@@ -1,0 +1,7 @@
+.pcp-slider__range{
+    opacity: 0
+}
+
+.pcp-button--variant-outline:hover:not(:disabled){
+    box-shadow: unset;
+}

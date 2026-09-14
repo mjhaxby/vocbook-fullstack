@@ -1,0 +1,90 @@
+.ReactTags__selected{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+/* the library list is a browse/click-to-edit view, not an add/remove editor */
+.tag-library-list .ReactTags__tagInput,
+.tag-library-list .ReactTags__remove{
+    display: none;
+}
+
+.ReactTags__tag, .ReactTags__suggestions li, .ReactTags__tagInputField, .ReactTags__tagInput:before{
+    --bg: #eee;
+    --color: #000; 
+    background: var(--bg);
+    color: var(--color);
+    border-radius: 3px;
+    padding: 5px 10px;    
+    border: none;
+    height: 40px;
+}
+
+.ReactTags__tag, .ReactTags__suggestions li mark{
+    font-weight: bold;
+}
+
+.ReactTags__suggestions li mark{
+    padding: 0;
+}
+
+.ReactTags__tag:before, .ReactTags__suggestions li:before{
+    content: "#";
+    margin-right: 3px;
+    font-weight: normal;    
+}
+
+.ReactTags__tagInput{
+    position: relative;
+}
+
+.ReactTags__tagInput:before{
+    content: "#";
+    padding-right: 0;    
+    display: inline-flex;
+    border-radius: 3px 0 0 3px;
+    vertical-align: middle; /* or: top */
+    align-items: center;
+}
+
+.ReactTags__tagInputField{
+    padding-left: 5px;
+    border-radius: 0 3px 3px 0;
+    vertical-align: middle; /* or: top */
+}
+
+.ReactTags__suggestions{
+    position: absolute;
+}
+
+.ReactTags__suggestions ul{    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  list-style-type: none;
+  margin: 0;
+  margin-top: 5px;
+  padding: 0;
+}
+
+.ReactTags__remove{
+    background: none;
+    border: none;
+}
+
+.ReactTags__remove svg{
+    fill: var(--color);
+    opacity: 0.5;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.ReactTags__remove:hover svg{
+    opacity: 0.9;
+}
+
+.class-tag{    
+    --bg: #000;
+    --color: #fff;
+}
