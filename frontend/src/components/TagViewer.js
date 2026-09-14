@@ -18,6 +18,7 @@ class TagViewer extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.tag_data !== this.props.tag_data || prevProps.class !== this.props.class) {
+      this.syncTagsFromProps();
       this.injectTagGroupStyles();
     }
   }  
