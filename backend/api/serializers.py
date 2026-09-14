@@ -1,6 +1,10 @@
+import logging
+
 from rest_framework import serializers
 
-from .models import Language, WordClass, ChunkClass, IPA, Lemma, Type, Chunk, TagType, Tag, Vocab, Relationship, Translation, Definition, FunctionTrigger
+from .models import Language, WordClass, ChunkClass, IPA, Lemma, Type, Chunk, TagGroup, Tag, Vocab, Relationship, Translation, Definition, FunctionTrigger
+
+logger = logging.getLogger(__name__)
 
 class LanguageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,16 +26,59 @@ class IPA_Serializer(serializers.ModelSerializer):
         model = IPA
         fields = '__all__'
 
-class TagTypeSerializer(serializers.ModelSerializer):
+class TagGroupSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TagType
+        model = TagGroup
         fields = '__all__'
 
 
 class TagSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    text = serializers.CharField(max_length=100)
+    tag_group_id = serializers.PrimaryKeyRelatedField(
+        source='tag_group',
+        queryset=TagGroup.objects.all(),
+        write_only=True,
+        required=False,
+        allow_null=True,
+    )
+    tag_group = TagGroupSerializer(read_only=True)
+    languages_id = serializers.PrimaryKeyRelatedField(
+        source='languages',
+        queryset=Language.objects.all(),
+        many=True,
+    )
+
+    # if creating a new tag with no tag type, use the "generic" tag type (if the "generic" tab type doens't exist, create it)
+    # generic tag types are usuaully going to be topic-based, they will be more likely made by learners or casual teachers
+    # a generic tag could always be changed later to a more specific tag type by an admin or a teacher, but the generic tag type is a good default for most tags
+    def create(self, validated_data):
+        languages = validated_data.pop('languages', [])
+        # make a new tag group if the tag group is not provided, and set it to "generic"
+        if 'tag_group' not in validated_data or validated_data['tag_group'] is None:
+            generic_tag_group, created = TagGroup.objects.get_or_create(name='generic', defaults={'unique': False})
+            validated_data['tag_group'] = generic_tag_group
+        tag_group = validated_data['tag_group']
+
+        # a tag with this text may already exist for other languages; reuse it instead of creating a duplicate
+        existing_tag = Tag.objects.filter(text=validated_data['text']).first()
+        if existing_tag is not None:
+            if existing_tag.tag_group_id != tag_group.pk:
+                logger.warning(
+                    "Tag '%s' already exists in tag group '%s'; keeping its tag group instead of '%s'.",
+                    existing_tag.text, existing_tag.tag_group.name, tag_group.name,
+                )
+            existing_tag.languages.add(*languages)
+            return existing_tag
+
+        tag = super().create(validated_data)
+        tag.languages.set(languages)
+        return tag
+
     class Meta:
         model = Tag
-        fields = '__all__'
+        fields = ['id', 'tag_group', 'tag_group_id', 'text', 'languages_id']
+        read_only_fields = ['id', 'tag_group']  
 
 class TypeSerializer(serializers.ModelSerializer):
     ipa_text= serializers.CharField(source='ipa.text', read_only=True)
@@ -104,9 +151,15 @@ class VocabSerializer(serializers.ModelSerializer):
     )
     is_lemma = serializers.SerializerMethodField()
     is_chunk = serializers.SerializerMethodField()
-    text = serializers.CharField(source='get_text', read_only=True)
-    vocabClass = serializers.CharField(source='get_vocab_class', read_only=True)    
-    tags = TagSerializer(many=True, read_only=True, source='get_tags')
+    text = serializers.SerializerMethodField()
+    vocab_class = serializers.SerializerMethodField()
+    vocab_class_id = serializers.SerializerMethodField()
+    tags = serializers.SerializerMethodField()
+    language_id = serializers.PrimaryKeyRelatedField(
+        source='language',
+        queryset=Language.objects.all(),     
+        required=True, 
+    )
 
     def get_is_lemma(self, obj):
         return obj.lemma is not None
@@ -127,6 +180,13 @@ class VocabSerializer(serializers.ModelSerializer):
             return obj.lemma.word_class.name if obj.lemma.word_class else None
         elif obj.chunk:
             return obj.chunk.chunk_class.name if obj.chunk.chunk_class else None
+        return None
+
+    def get_vocab_class_id(self, obj):
+        if obj.lemma:
+            return obj.lemma.word_class.id if obj.lemma.word_class else None
+        elif obj.chunk:
+            return obj.chunk.chunk_class.id if obj.chunk.chunk_class else None
         return None
 
     def get_tags(self, obj):
@@ -212,6 +272,7 @@ class VocabSerializer(serializers.ModelSerializer):
         model = Vocab
         fields = [
             'id',
+            'language_id',
             'definitions',
             'translations',
             'lemma',
@@ -221,13 +282,14 @@ class VocabSerializer(serializers.ModelSerializer):
             'is_lemma',
             'is_chunk',
             'text',
-            'vocabClass',
+            'vocab_class',
+            'vocab_class_id',
             'tags',
             'source',
-            'language',
         ] 
 
-
+# issue: One thing to flag in your serializer while we're here: create() references validated_data['language_id'], but your field is defined with source='languages', meaning validated_data will contain a key languages (or language_id won't exist as a key — DRF renames it to the source value once validated). That line will likely throw a KeyError. Want me to look at that once the queryset issue is sorted, or fix both now?
+# see Claude chat "Django ManyToMany filter"
 
 class FunctionTriggerSerializer(serializers.ModelSerializer):
     class Meta:

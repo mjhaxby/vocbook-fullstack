@@ -9,12 +9,13 @@ from .views import (
     LanguageViewSet,
     LemmaViewSet,
     RelationshipViewSet,
-    TagTypeViewSet,
+    TagGroupViewSet,
     TagViewSet,
     TranslationViewSet,
     TypeViewSet,
     VocabViewSet,
     WordClassViewSet,
+    csrf_view
 )
 
 router = DefaultRouter()
@@ -25,12 +26,13 @@ router.register(r'ipas', IPAViewSet)
 router.register(r'lemmas', LemmaViewSet)
 router.register(r'types', TypeViewSet)
 router.register(r'chunks', ChunkViewSet)
-router.register(r'tag-types', TagTypeViewSet)
+router.register(r'tag-types', TagGroupViewSet)
 router.register(r'tags', TagViewSet)
 router.register(r'vocabs', VocabViewSet)
 router.register(r'relationships', RelationshipViewSet)
 router.register(r'translations', TranslationViewSet)
 router.register(r'definitions', DefinitionViewSet)
 router.register(r'function-triggers', FunctionTriggerViewSet)
+router.register(r'csrf', csrf_view, basename='csrf')
 
 urlpatterns = router.urls

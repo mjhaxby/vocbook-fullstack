@@ -92,15 +92,31 @@ class Type(models.Model):
 
     def __str__(self):
         return self.text
+
+class ChunkType(models.Model):
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
+    chunk = models.ForeignKey('Chunk', on_delete=models.CASCADE, related_name='types')
+    text = models.CharField(max_length=255)    
+    is_headchunk = models.BooleanField()
+    ipa = models.ForeignKey(IPA, on_delete=models.SET_NULL, null=True, blank=True)
+    tags = models.ManyToManyField('Tag', related_name='chunk_type_uses', blank=True) # tags can be added at the type level to indicate a particular usage of the word. if a unique tag type, it will override the one in the Vocab
+
+    source = models.CharField(max_length=255, null=True, blank=True) # source of the type, e.g. a dictionary or corpus.
+
+    # Only use this for when the chunk has an orthographical variant for a specific dialect.
+    dialect = models.ForeignKey(Dialect, on_delete=models.SET_NULL, null=True, blank=True) # use the lowest relevant level dialect.
+
+    def __str__(self):
+        return self.text
     
 
 class Chunk(models.Model):    
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
-    dialect = models.ForeignKey(Dialect, on_delete=models.SET_NULL, null=True, blank=True) # use the lowest relevant level dialect        
-    text = models.CharField(max_length=1023)
-    lemmas = models.ManyToManyField(Lemma)
-    chunk_class = models.ForeignKey(ChunkClass, on_delete=models.SET_NULL, null=True)
-    ipa = models.ForeignKey(IPA, on_delete=models.SET_NULL, null=True, blank=True)
+    dialect = models.ForeignKey(Dialect, on_delete=models.SET_NULL, null=True, blank=True) # use the lowest relevant level dialect            
+    main_lemmas = models.ManyToManyField(Lemma) # up to three? known in UI as "key words"
+    chunk_types = models.ManyToManyField('ChunkType', related_name='chunk_uses', blank=True) # a chunk type is a variant form of a chunk (e.g. to work out, working out, worked out etc.)
+    # not sure if we need to explicitly include all chunk types or whether we can imply them from the main lemmas? in English, probably yes, but other groups will be more complicated (like when there's agreement)
+    chunk_class = models.ForeignKey(ChunkClass, on_delete=models.SET_NULL, null=True)    
     source = models.CharField(max_length=255, null=True, blank=True) # source of the chunk, e.g. a dictionary or corpus.
 
     # do we want to account for variants? …probably!
@@ -109,12 +125,13 @@ class Chunk(models.Model):
         return self.text
 
     
-class TagType(models.Model):
+class TagGroup(models.Model):
 
     name = models.CharField(max_length=100)
-    unique = models.BooleanField() # unique tags are tags that can only be present if no other tag shares the same type in the same vocab, for example gender or register
+    unique = models.BooleanField(default=False) # unique tags are tags that can only be present if no other tag shares the same type in the same vocab, for example gender or register
     word_class_restrictions = models.ManyToManyField(WordClass, related_name='tags', blank=True) # if a tag type has word class restrictions, it can only be applied to vocabs of that word class. For example,
     chunk_class_restrictions = models.ManyToManyField(ChunkClass, related_name='tags', blank=True) # if a tag type has chunk class restrictions, it can only be applied to vocabs of that chunk class. For example, a tag type "idiom" can only be applied to vocabs of the chunk class "idiom"
+    color = models.CharField(max_length=7, default="#EEE") # hex color code for the tag type, e.g. "#FF0000" for red
 
     lemma_level = models.BooleanField(default=False) 
     type_level = models.BooleanField(default=False) # tags at this level are types like "number" (singular/plural) or "person" (first/second/third)
@@ -127,11 +144,12 @@ class TagType(models.Model):
 
 class Tag(models.Model):
     languages = models.ManyToManyField(Language, related_name='tags')
-    tag_type = models.ManyToManyField(TagType, related_name='tags') # to do: add default "generic"?    
+    tag_group = models.ForeignKey(TagGroup, related_name='tags', on_delete=models.CASCADE) # default "generic" tag type will be created/used if no tag type is specified (see serializers)
     text = models.CharField(max_length=100)
 
     def __str__(self):
         return self.text
+
 
 
 class Vocab(models.Model):
@@ -153,6 +171,7 @@ class Vocab(models.Model):
     def isChunk(self):
         # by default
         return (self.lemma == None and self.chunk != None)
+
     
     def __str__(self):
         if self.isLemma():
