@@ -1,3 +1,4 @@
+from django.urls import path
 from rest_framework.routers import DefaultRouter
 
 from .views import (
@@ -33,6 +34,7 @@ router.register(r'relationships', RelationshipViewSet)
 router.register(r'translations', TranslationViewSet)
 router.register(r'definitions', DefinitionViewSet)
 router.register(r'function-triggers', FunctionTriggerViewSet)
-router.register(r'csrf', csrf_view, basename='csrf')
 
-urlpatterns = router.urls
+urlpatterns = router.urls + [
+    path('csrf/', csrf_view, name='csrf'),
+]
