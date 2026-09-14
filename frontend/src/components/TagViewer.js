@@ -2,14 +2,12 @@ import React from "react";
 import { WithContext as ReactTags, SEPARATORS } from "react-tag-input";
 import '../css/tag.css';
 
-class TagEditor extends React.Component {
+class TagViewer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      tag_data: [],     
-      class: {id: -1, name: ''}, 
-      tags: []
+      tags: [],
     };
   }
 
@@ -31,7 +29,7 @@ class TagEditor extends React.Component {
   // builds one CSS rule per distinct tag group so its colour can be set at runtime
   injectTagGroupStyles = () => {
     const seen = new Map();
-    this.state.tag_data.forEach(tag => seen.set(tag.tag_group.id, tag.tag_group));
+    this.props.tag_data.forEach(tag => seen.set(tag.tag_group.id, tag.tag_group));
 
     const css = Array.from(seen.values())
       .map(group => `.tag-group-${group.id}{ --bg: ${group.color}; --color: ${this.contrastColor(group.color)}; }`)
@@ -55,13 +53,19 @@ class TagEditor extends React.Component {
     return brightness > 150 ? '#000' : '#fff';
   }
 
-  syncTagsFromProps = () => {
-      const tags = [{id: 'classTag', className: `class-tag class-tag-${this.state.class.id}`, text: this.state.class.name}]
-      .concat(this.state.tag_data.map(
+  syncTagsFromProps = () => {    
+    console.log("Syncing tags from props:", this.props.tag_data);
+    console.log("Class info:", this.props.class);
+      const tags = [{id: 'classTag', className: `class-tag class-tag-${this.props.class.id}`, text: this.props.class.name}]      
+      .concat(this.props.tag_data.map(
         (tag) => {
           return {id: 'tag-' + tag.id, className: `tag tag-group-${tag.tag_group.id} tag-unique-${tag.tag_group.unique}`, text: tag.text}
         }      
       ))
+
+      console.log("Synced tags:", tags);
+
+      this.setState({ tags });
   }
 
   render(){
@@ -75,3 +79,6 @@ class TagEditor extends React.Component {
     )
   }
 
+}
+
+export default TagViewer;
