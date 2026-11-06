@@ -1,8 +1,9 @@
 import logging
 
 from rest_framework import serializers
+from django.db import transaction
 
-from .models import Language, WordClass, ChunkClass, IPA, Lemma, Type, Chunk, TagGroup, Tag, Vocab, Relationship, Translation, Definition, FunctionTrigger
+from .models import Language, WordClass, ChunkClass, IPA, Lemma, Type, Chunk, ChunkType, TagGroup, Tag, Vocab, Relationship, Translation, Definition, FunctionTrigger
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +31,6 @@ class TagGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = TagGroup
         fields = '__all__'
-
 
 class TagSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
@@ -87,27 +87,124 @@ class TypeSerializer(serializers.ModelSerializer):
         model = Type
         fields = '__all__'
 
+class LemmaTypeInputSerializer(serializers.Serializer):
+    text = serializers.CharField(max_length=255)
+    is_headword = serializers.BooleanField()
+
+
 class LemmaSerializer(serializers.ModelSerializer):
     headword = serializers.SerializerMethodField()
     word_class = WordClassSerializer(read_only=True)
     types = TypeSerializer(many=True, read_only=True)
     tags = TagSerializer(many=True, read_only=True)
+    word_class_name = serializers.CharField(max_length=100, write_only=True, required=False)
+    headword_text = serializers.CharField(max_length=255, required=False)
+    types_input = LemmaTypeInputSerializer(
+        many=True, write_only=True, required=False
+    )
 
     def get_headword(self, obj):
         headword = Type.objects.filter(lemma=obj, is_headword=True).first()
         return TypeSerializer(headword).data if headword else None
+
+    def validate(self, attrs):
+        if self.instance is not None:
+            create_only = ('headword_text', 'types_input', 'word_class_name')
+            errors = {
+                field: 'This field cannot be updated yet.'
+                for field in create_only if field in attrs
+            }
+            if errors:
+                raise serializers.ValidationError(errors)
+            return attrs
+
+        if 'word_class_name' not in attrs:
+            raise serializers.ValidationError({'word_class_name': 'This field is required.'})
+
+        types = attrs.get('types_input', [])
+        headwords = [item for item in types if item['is_headword']]
+        headword_text = attrs.get('headword_text')
+
+        if len(headwords) > 1:
+            raise serializers.ValidationError({
+                'types_input': 'Provide at most one headword.'
+            })
+
+        if headwords:
+            if headword_text and headword_text != headwords[0]['text']:
+                raise serializers.ValidationError({
+                    'headword_text': 'Must match the headword type.'
+                })
+            attrs['headword_text'] = headwords[0]['text']
+        elif headword_text:
+            types.append({'text': headword_text, 'is_headword': True})
+        else:
+            raise serializers.ValidationError({
+                'headword_text': 'Provide a headword here or in types_input.'
+            })
+
+        attrs['types_input'] = types
+        return attrs
+
+    @transaction.atomic
+    def create(self, validated_data):
+        types_data = validated_data.pop('types_input')
+        word_class_name = validated_data.pop('word_class_name')
+        language = validated_data['language']
+
+        matches = WordClass.objects.filter(
+            name=word_class_name, languages=language
+        )
+        if matches.count() > 1:
+            raise serializers.ValidationError({
+                'word_class_name': 'Multiple word classes match this language.'
+            })
+
+        word_class = matches.first()
+        if word_class is None:
+            word_class = WordClass.objects.create(name=word_class_name)
+            word_class.languages.add(language)
+
+        validated_data['word_class'] = word_class
+        lemma = super().create(validated_data)
+        for type_data in types_data:
+            Type.objects.create(lemma=lemma, language=language, **type_data)
+
+        return lemma
     
     class Meta:
         model = Lemma
-        fields = ['id', 'language', 'dialect', 'word_class', 'frequency_rank', 'word_family_frequency_band', 'tags', 'source', 'types', 'relationsX', 'relationsY', 'headword']        
-        read_only_fields = ['id', 'headword']  # Make headword read-only
+        fields = [
+            'id', 'language', 'dialect', 'word_class', 'word_class_name',
+            'headword_text', 'frequency_rank', 'word_family_frequency_band',
+            'tags', 'source', 'types', 'types_input', 'relationsX', 'relationsY',
+            'headword',
+        ]
+        read_only_fields = ['id', 'headword']
+        extra_kwargs = {
+            'relationsX': {'required': False},
+            'relationsY': {'required': False},
+        }
 
 
 class ChunkSerializer(serializers.ModelSerializer):
+    headchunk = serializers.SerializerMethodField()
+
+    def get_headchunk(self, obj):
+        headchunk = ChunkType.objects.filter(chunk=obj, is_headchunk=True).first()
+        return ChunkTypeSerializer(headchunk).data if headchunk else None
+
     class Meta:
         model = Chunk
-        fields = '__all__'
+        fields = ['id', 'language', 'dialect', 'chunk_class', 'source', 'headchunk', 'main_lemmas', 'chunk_types']
+        read_only_fields = ['id', 'headchunk']  # Make headchunk read-only        
 
+class ChunkTypeSerializer(serializers.ModelSerializer):
+    ipa_text= serializers.CharField(source='ipa.text', read_only=True)
+
+    class Meta:
+        model = ChunkType
+        fields = '__all__'
 
 class RelationshipSerializer(serializers.ModelSerializer):
     class Meta:
@@ -172,7 +269,8 @@ class VocabSerializer(serializers.ModelSerializer):
             headword = Type.objects.filter(lemma=obj.lemma, is_headword=True).first()
             return headword.text if headword else None
         elif obj.chunk:
-            return obj.chunk.text
+            headchunk = ChunkType.objects.filter(chunk=obj.chunk, is_headchunk=True).first()
+            return headchunk.text if headchunk else None
         return None
 
     def get_vocab_class(self, obj):
@@ -193,7 +291,8 @@ class VocabSerializer(serializers.ModelSerializer):
         if obj.lemma:
             return TagSerializer(obj.lemma.tags.all(), many=True).data
         elif obj.chunk:
-            return TagSerializer(obj.chunk.tags.all(), many=True).data
+            # return TagSerializer(obj.chunk.tags.all(), many=True).data
+            return []  # For now, return an empty list for chunk tags until we implement chunk-level tags
         return []
 
     def create(self, validated_data):
