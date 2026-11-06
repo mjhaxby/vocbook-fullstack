@@ -3,7 +3,8 @@ from rest_framework.routers import DefaultRouter
 
 from .views import (
     ChunkClassViewSet,
-    ChunkViewSet,
+    ChunkViewSet,   
+    ChunkTypeViewSet, 
     DefinitionViewSet,
     FunctionTriggerViewSet,
     IPAViewSet,
@@ -13,7 +14,7 @@ from .views import (
     TagGroupViewSet,
     TagViewSet,
     TranslationViewSet,
-    TypeViewSet,
+    TypeViewSet,    
     VocabViewSet,
     WordClassViewSet,
     csrf_view
@@ -27,6 +28,7 @@ router.register(r'ipas', IPAViewSet)
 router.register(r'lemmas', LemmaViewSet)
 router.register(r'types', TypeViewSet)
 router.register(r'chunks', ChunkViewSet)
+router.register(r'chunk-types', ChunkTypeViewSet)
 router.register(r'tag-types', TagGroupViewSet)
 router.register(r'tags', TagViewSet)
 router.register(r'vocabs', VocabViewSet)

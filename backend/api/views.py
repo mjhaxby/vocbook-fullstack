@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import JsonResponse
-from .models import IPA, Language, WordClass, ChunkClass, Lemma, Type, Chunk, TagGroup, Tag, Vocab, Relationship, Translation, Definition, FunctionTrigger
-from .serializers import IPA_Serializer, LanguageSerializer, WordClassSerializer, ChunkClassSerializer, LemmaSerializer, TypeSerializer, ChunkSerializer, TagGroupSerializer, TagSerializer, VocabSerializer, RelationshipSerializer, TranslationSerializer, DefinitionSerializer, FunctionTriggerSerializer    
+from .models import IPA, Language, WordClass, ChunkClass, ChunkType, Lemma, Type, Chunk, TagGroup, Tag, Vocab, Relationship, Translation, Definition, FunctionTrigger
+from .serializers import IPA_Serializer, LanguageSerializer, WordClassSerializer, ChunkClassSerializer, LemmaSerializer, TypeSerializer, ChunkSerializer, ChunkTypeSerializer, TagGroupSerializer, TagSerializer, VocabSerializer, RelationshipSerializer, TranslationSerializer, DefinitionSerializer, FunctionTriggerSerializer    
 
 @ensure_csrf_cookie
 def csrf_view(request):
@@ -57,6 +57,27 @@ class ChunkClassViewSet(viewsets.ModelViewSet):
 
         return queryset
 
+class ChunkTypeViewSet(viewsets.ModelViewSet):
+    queryset = ChunkType.objects.all()
+    serializer_class = ChunkTypeSerializer
+
+    def get_queryset(self):
+        queryset = ChunkType.objects.all()
+        text = self.request.query_params.get('text')
+        language_id = self.request.query_params.get('language_id')
+
+        if text or language_id:
+            # a search was attempted — require both, or return nothing
+            if text and language_id:
+                queryset = queryset.filter(text=text, language__id=language_id)
+            elif language_id:
+                queryset = queryset.filter(language__id=language_id)
+            else:
+                queryset = queryset.none()
+        # else: no search params at all → return full unfiltered list
+
+        return queryset
+
 class IPAViewSet(viewsets.ModelViewSet):
     queryset = IPA.objects.all()
     serializer_class = IPA_Serializer
@@ -64,6 +85,28 @@ class IPAViewSet(viewsets.ModelViewSet):
 class LemmaViewSet(viewsets.ModelViewSet):
     queryset = Lemma.objects.all()
     serializer_class = LemmaSerializer
+
+    def get_queryset(self):
+        queryset = Lemma.objects.all()
+        headword = self.request.query_params.get('headword')
+        word_class_id = self.request.query_params.get('word_class_id')
+        text = self.request.query_params.get('text')
+
+
+        if text:
+            # a search was attempted - search all types for the given text
+            queryset = queryset.filter(types__text=text)
+        elif headword or word_class_id:
+            # a search was attempted — require both, or return nothing
+            if headword and word_class_id:
+                queryset = queryset.filter(headword=headword, word_class__id=word_class_id)
+            elif word_class_id:
+                queryset = queryset.filter(word_class__id=word_class_id)
+            else:
+                queryset = queryset.none()
+        # else: no search params at all → return full unfiltered list
+
+        return queryset
 
 
 class TypeViewSet(viewsets.ModelViewSet):
