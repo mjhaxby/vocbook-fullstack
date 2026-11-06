@@ -41,7 +41,7 @@ class VocabListPage extends Component {
     render(){
         return (
             <div>
-                <h1>Vocab List</h1>
+                <h1>Browse</h1>
                 {this.state.loading && <p>Loading...</p>}
                 {this.state.error && <p className="text-danger">{this.state.error}</p>}
                 {this.state.vocabs.length === 0 && !this.state.loading && !this.state.error && (
