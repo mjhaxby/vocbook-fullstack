@@ -113,16 +113,17 @@ class ChunkType(models.Model):
 class Chunk(models.Model):    
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
     dialect = models.ForeignKey(Dialect, on_delete=models.SET_NULL, null=True, blank=True) # use the lowest relevant level dialect            
-    main_lemmas = models.ManyToManyField(Lemma) # up to three? known in UI as "key words"
+    main_lemmas = models.ManyToManyField(Lemma, blank=True, related_name='chunks') # up to three? known in UI as "key words"
     chunk_types = models.ManyToManyField('ChunkType', related_name='chunk_uses', blank=True) # a chunk type is a variant form of a chunk (e.g. to work out, working out, worked out etc.)
     # not sure if we need to explicitly include all chunk types or whether we can imply them from the main lemmas? in English, probably yes, but other groups will be more complicated (like when there's agreement)
     chunk_class = models.ForeignKey(ChunkClass, on_delete=models.SET_NULL, null=True)    
     source = models.CharField(max_length=255, null=True, blank=True) # source of the chunk, e.g. a dictionary or corpus.
+    tags = models.ManyToManyField('Tag', related_name='chunk_uses', blank=True) # tags can be added at the chunk level to indicate a particular usage of a chunk. if a unique tag type, it will override the one in the Vocab
 
     # do we want to account for variants? …probably!
 
     def __str__(self):
-        return self.text
+        return self.chunk_types.filter(is_headchunk=True).first().text if self.chunk_types.filter(is_headchunk=True).exists() else ''
 
     
 class TagGroup(models.Model):
@@ -134,7 +135,9 @@ class TagGroup(models.Model):
     color = models.CharField(max_length=7, default="#EEE") # hex color code for the tag type, e.g. "#FF0000" for red
 
     lemma_level = models.BooleanField(default=False) 
+    chunk_level = models.BooleanField(default=False) 
     type_level = models.BooleanField(default=False) # tags at this level are types like "number" (singular/plural) or "person" (first/second/third)
+    chunk_type_level = models.BooleanField(default=False) 
     vocab_level = models.BooleanField(default=True) # by default a tag type can be applied to a vocab, but not necessarily to a lemma or type. For example, a tag type "register" can be applied to a vocab, but not to a lemma or type.
     definition_level = models.BooleanField(default=True)
     translation_level = models.BooleanField(default=True)
@@ -160,6 +163,8 @@ class Vocab(models.Model):
     chunk = models.ForeignKey(Chunk, related_name='uses', on_delete=models.CASCADE, null=True, blank=True)       
     source = models.CharField(max_length=255, null=True, blank=True) # source of the vocab, e.g. a dictionary or corpus.
     tags = models.ManyToManyField(Tag, related_name='uses', blank=True) 
+    datetime_added = models.DateTimeField(auto_now_add=True)
+    datetime_modified = models.DateTimeField(auto_now=True)
     # UI should also pull up word class or chunk class, plus chunk- lemma-level dialects add display these as tags (type-level dialects should be displayed alongside the variants in the UI)
 
     # to do: examples!
@@ -260,13 +265,13 @@ class FunctionTrigger(models.Model):
     word_class = models.ForeignKey(WordClass, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, related_name='function_triggers', blank=True)
     # optional_tags? suggested_tags?
-    proceding = models.BooleanField()
+    preceding = models.BooleanField()
     default_show = models.BooleanField() # Show in front or following lemmas of the word class
 
     # to do: add conditions (regex on text and/or on ipa and tags to determine whether it should be shown for that word, this will allow us to choose between showing le, la o l' in French… if we ever make this available in French!)
 
     def following(self):
-        return self.proceding == False
+        return self.preceding == False
     
     def __str__(self):
         return self.text
