@@ -1,5 +1,6 @@
 import React from "react";
 import { WithContext as ReactTags, SEPARATORS } from "react-tag-input";
+import '../css/global.css';
 import '../css/tag.css';
 
 class TagViewer extends React.Component {

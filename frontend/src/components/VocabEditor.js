@@ -390,7 +390,7 @@ class VocabEditor extends Component {
         const { vocab } = this.state;
 
         return (
-            <div className="form-container editor-container">
+            <div className="form-container editor-container frame">
                 <div className="form-group">
                     <label htmlFor="text" className={`vocab-type ${vocab.is_lemma ? 'lemma' : 'chunk'}`}><span id="vocabType">{vocab.is_lemma ? 'Word' : 'Expression'}</span> • <span id="notVocabType">{vocab.is_lemma ? 'Expression' : 'Word'}</span> </label>
                     <input
