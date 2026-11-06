@@ -8,8 +8,8 @@ import VocabEditorPage from './pages/VocabEditorPage';
 import TagLibraryPage from './pages/TagLibraryPage';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEdit, faTrash, faPlus, faSave } from '@fortawesome/free-solid-svg-icons';
-library.add(faEdit, faTrash, faPlus, faSave);
+import { faEdit, faTrash, faPlus, faSave, faVolume, faFilter, faArrowDownWideShort, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+library.add(faEdit, faTrash, faPlus, faSave, faVolume, faFilter, faArrowDownWideShort, faChevronDown);
 
 function App() {
   const [vocabs, setVocabs] = useState([]);
