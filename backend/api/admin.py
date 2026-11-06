@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import IPA, Language, TagGroup, WordClass, ChunkClass, Lemma, Type, Chunk, TagGroup, Tag, Vocab, Relationship, Translation, Definition, FunctionTrigger
+from .models import IPA, ChunkType, Language, TagGroup, WordClass, ChunkClass, Lemma, Type, Chunk, TagGroup, Tag, Vocab, Relationship, Translation, Definition, FunctionTrigger
 
 # Register your models here.
 admin.site.register(Language)
@@ -9,6 +9,7 @@ admin.site.register(IPA)
 admin.site.register(Lemma)
 admin.site.register(Type)
 admin.site.register(Chunk)
+admin.site.register(ChunkType)
 admin.site.register(TagGroup)
 admin.site.register(Tag)
 admin.site.register(Vocab)
