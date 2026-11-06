@@ -2,11 +2,120 @@ from django.core.exceptions import ValidationError
 from django.db import transaction
 from rest_framework.test import APITestCase
 
-from .models import Definition, Language, Lemma, Tag, TagGroup, Translation, Type, Vocab, WordClass
+from .models import Definition, IPA, Language, Lemma, Tag, TagGroup, Translation, Type, Vocab, WordClass
 from .serializers import TagSerializer
 
 
 class LemmaCreationTests(APITestCase):
+	def test_create_from_headword_text_and_return_headword_object(self):
+		english = Language.objects.create(code='en', name='English')
+		noun = WordClass.objects.create(name='noun')
+		noun.languages.add(english)
+		response = self.client.post('/api/lemmas/', {
+			'language': english.pk,
+			'word_class_name': 'noun',
+			'headword_text': 'banana',
+			'types_input': [{'text': 'bananas', 'is_headword': False}],
+		}, format='json')
+
+		self.assertEqual(response.status_code, 201, response.data)
+		lemma = Lemma.objects.get(pk=response.data['id'])
+		self.assertEqual(lemma.word_class, noun)
+		self.assertEqual(lemma.headword_text, 'banana')
+		headword = lemma.types.get(is_headword=True)
+		self.assertEqual(headword.language, english)
+		self.assertEqual(response.data['headword']['id'], headword.pk)
+		self.assertEqual(response.data['headword']['text'], 'banana')
+		self.assertEqual(lemma.types.count(), 2)
+
+	def test_create_from_headword_type_creates_word_class(self):
+		english = Language.objects.create(code='en', name='English')
+		response = self.client.post('/api/lemmas/', {
+			'language': english.pk,
+			'word_class_name': 'noun',
+			'types_input': [{'text': 'banana', 'is_headword': True}],
+		}, format='json')
+
+		self.assertEqual(response.status_code, 201, response.data)
+		lemma = Lemma.objects.get(pk=response.data['id'])
+		self.assertEqual(lemma.headword_text, 'banana')
+		self.assertEqual(lemma.word_class.name, 'noun')
+		self.assertTrue(lemma.word_class.languages.filter(pk=english.pk).exists())
+		self.assertEqual(response.data['headword']['text'], 'banana')
+
+	def test_create_with_only_headword_text(self):
+		english = Language.objects.create(code='en', name='English')
+		response = self.client.post('/api/lemmas/', {
+			'language': english.pk, 'word_class_name': 'noun', 'headword_text': 'banana',
+		}, format='json')
+		self.assertEqual(response.status_code, 201, response.data)
+		lemma = Lemma.objects.get(pk=response.data['id'])
+		self.assertEqual(lemma.types.count(), 1)
+		self.assertEqual(lemma.types.get().text, 'banana')
+		self.assertTrue(lemma.types.get().is_headword)
+
+	def test_matching_headword_text_and_type_create_one_headword(self):
+		english = Language.objects.create(code='en', name='English')
+		response = self.client.post('/api/lemmas/', {
+			'language': english.pk,
+			'word_class_name': 'noun',
+			'headword_text': 'banana',
+			'types_input': [{'text': 'banana', 'is_headword': True}],
+		}, format='json')
+		self.assertEqual(response.status_code, 201, response.data)
+		self.assertEqual(Lemma.objects.get(pk=response.data['id']).types.count(), 1)
+
+	def test_get_returns_full_headword_object(self):
+		english = Language.objects.create(code='en', name='English')
+		lemma = Lemma.objects.create(language=english, headword_text='banana')
+		ipa = IPA.objects.create(language=english, text='bəˈnɑːnə')
+		headword = Type.objects.create(
+			language=english, lemma=lemma, text='banana', is_headword=True, ipa=ipa,
+		)
+		response = self.client.get(f'/api/lemmas/{lemma.pk}/')
+		self.assertEqual(response.status_code, 200, response.data)
+		self.assertEqual(response.data['headword']['id'], headword.pk)
+		self.assertEqual(response.data['headword']['ipa_text'], ipa.text)
+		self.assertEqual(response.data['headword']['lemma'], lemma.pk)
+		self.assertEqual(response.data['headword']['tags'], [])
+
+	def test_invalid_headword_inputs_are_rejected(self):
+		english = Language.objects.create(code='en', name='English')
+		base = {'language': english.pk, 'word_class_name': 'noun'}
+		cases = [
+			{},
+			{'headword_text': 'banana', 'types_input': [{'text': 'apple', 'is_headword': True}]},
+			{'types_input': [
+				{'text': 'banana', 'is_headword': True},
+				{'text': 'apple', 'is_headword': True},
+			]},
+		]
+		for case in cases:
+			with self.subTest(case=case):
+				response = self.client.post('/api/lemmas/', {**base, **case}, format='json')
+				self.assertEqual(response.status_code, 400, response.data)
+		self.assertFalse(Lemma.objects.exists())
+		self.assertFalse(WordClass.objects.exists())
+
+	def test_headword_updates_are_explicitly_rejected(self):
+		english = Language.objects.create(code='en', name='English')
+		lemma = Lemma.objects.create(language=english, headword_text='banana')
+		Type.objects.create(language=english, lemma=lemma, text='banana', is_headword=True)
+		for data in (
+			{'headword_text': 'apple'},
+			{'types_input': [{'text': 'apple', 'is_headword': True}]},
+			{'word_class_name': 'noun'},
+		):
+			with self.subTest(data=data):
+				response = self.client.patch(f'/api/lemmas/{lemma.pk}/', data, format='json')
+				self.assertEqual(response.status_code, 400, response.data)
+		lemma.refresh_from_db()
+		self.assertEqual(lemma.headword_text, 'banana')
+		self.assertEqual(lemma.types.get(is_headword=True).text, 'banana')
+		response = self.client.patch(f'/api/lemmas/{lemma.pk}/', {'source': 'dictionary'}, format='json')
+		self.assertEqual(response.status_code, 200, response.data)
+		self.assertEqual(response.data['source'], 'dictionary')
+
 	def test_create_lemma_with_headword_type(self):
 		english = Language.objects.create(code='en', name='English')
 		noun = WordClass.objects.create(name='noun')
@@ -158,5 +267,3 @@ class TagCreationTests(APITestCase):
 
 		self.assertEqual(Tag.objects.filter(text='slang').count(), 1)
 		self.assertCountEqual(tag.languages.all(), [self.english, self.french])
-
-
