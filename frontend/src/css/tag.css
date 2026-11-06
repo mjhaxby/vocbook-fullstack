@@ -12,14 +12,18 @@
 }
 
 .ReactTags__tag, .ReactTags__suggestions li, .ReactTags__tagInputField, .ReactTags__tagInput:before{
-    --bg: #eee;
-    --color: #000; 
+    --bg: var(--fg-color-accent);
+    --fg: #fff; 
     background: var(--bg);
-    color: var(--color);
+    color: var(--fg);
     border-radius: 3px;
     padding: 5px 10px;    
     border: none;
     height: 40px;
+}
+
+.ReactTags__tagInput ::placeholder{
+    color: var(--fg-color-desat-light);
 }
 
 .ReactTags__tag, .ReactTags__suggestions li mark{
@@ -75,7 +79,7 @@
 }
 
 .ReactTags__remove svg{
-    fill: var(--color);
+    fill: var(--fg);
     opacity: 0.5;
     transition: opacity 0.2s ease-in-out;
 }
@@ -85,6 +89,6 @@
 }
 
 .class-tag{    
-    --bg: #000;
-    --color: #fff;
+    --bg: #5862ED;
+    --fg: #fff; 
 }

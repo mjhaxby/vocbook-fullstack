@@ -1,0 +1,43 @@
+.vocab-list-heading {
+    margin: 0;
+}
+
+.vocab-list-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+}
+
+.vocab-list-toggle:focus-visible {
+    outline: 2px solid var(--fg-color-accent);
+    outline-offset: 3px;
+}
+
+.vocab-list-details {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 250ms ease;
+}
+
+.vocab-list-details.is-open {
+    grid-template-rows: 1fr;
+}
+
+.vocab-list-details-inner {
+    min-height: 0;
+    overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .vocab-list-details {
+        transition: none;
+    }
+}

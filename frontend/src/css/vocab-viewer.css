@@ -1,0 +1,51 @@
+
+
+h1{
+    margin: 0;
+}
+
+.vocab-viewer{
+    background-color: var(--bg-light);
+}
+
+.language-code{
+    border-radius: 3px;
+    background-color: var(--fg);
+    color: var(--bg);
+    text-transform: uppercase;
+    width: 30px;
+    text-align: center;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.translation-list, .definition-list{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.translation-list li, .definition-list li{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lemma-info, .chunk-info{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;    
+}
+
+.lemma-info div, .chunk-info div{
+    color: var(--fg-light);
+    transition: color 0.3s ease;
+}
+
+.lemma-info div:hover, .chunk-info div:hover{
+    color: var(--fg);
+}
